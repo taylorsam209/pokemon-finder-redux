@@ -4,9 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// Redux imports
+import { Provider } from 'react-redux';
+import store from './store'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+ReactDOM.render(
+    
+    // Wrap the entire app with the provider tag
+    // This gives the app access to the store 
+    // Provider takes one property which is the store
+
+    <Provider store={store}>
+        <App />
+    </Provider>
+
+    , document.getElementById('root'));
 serviceWorker.unregister();

@@ -11,11 +11,11 @@
 }
 
 
-
 .App {
   display: flex;
-  justify-content: center;
   text-align: center;
+  align-items: center;
+  flex-direction: column;
   background-image: url('https://wallpapercave.com/wp/cqhO8rQ.jpg');
   background-size: cover;
   background-repeat: no-repeat;

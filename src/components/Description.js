@@ -23,38 +23,37 @@ class Description extends React.Component {
     const { pokemon } = this.props;
     return (
       <div className='desc'>
-        <img className='img' src={pokemon ? pokemon.sprites.front_default : null} alt='poke' />
+        <img className='img' src={pokemon.sprites.front_default} alt='poke' />
         {pokemon.sprites.back_default ? <img className='img' src={pokemon.sprites.back_default} alt='poke' /> : null}
-        <div>Name: {pokemon && pokemon.name}</div>
-        <div>Height: {pokemon && pokemon.height}</div>
-        <div>Weight: {pokemon && pokemon.weight}</div>
-        <div>Base Exp: {pokemon && pokemon.base_experience}</div>
-        <div style={{ marginTop: '30px' }}>Abilities: {pokemon && pokemon.abilities.map(ability => <div key={ability.name}>{ability.ability.name}</div>)}</div>
+        <div>Name: {pokemon.name}</div>
+        <div>Height: {pokemon.height}</div>
+        <div>Weight: {pokemon.weight}</div>
+        <div>Base Exp: {pokemon.base_experience}</div>
+        <div style={{ marginTop: '30px' }}>Abilities: {pokemon.abilities.map(ability => <div key={ability.name}>{ability.ability.name}</div>)}</div>
       </div>
     )
   }
 
-  handleView = () => {
-    const { pokemon } = this.props;
-    if (pokemon) {
-      if (pokemon === 'none found') {
+  render() {
+    console.log('pokemon =>', this.props.pokemon)
+    if (this.props.pokemon) {
+      if (this.props.pokemon === 'none found') {
         return this.renderPokemonNotFound()
       }
-      return this.renderPokemonInfo()
+      else return this.renderPokemonInfo()
     }
     return this.renderPlaceholder()
   }
-
-  render() {
-    console.log(this.props.pokemon)
-    return this.handleView()
-  }
 }
 
-const mapStateToProps = (state) => {
+
+// maps the redux data store/state to props
+// example => state.pokemon can now be accessed with this.props.pokemon
+const mapStateToProps = state => {
   return {
     pokemon: state.pokemon
   }
 }
 
+// connect method takes in mapStateToProps, and mapDispatchToProps
 export default connect(mapStateToProps)(Description);

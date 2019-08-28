@@ -31,10 +31,12 @@ export function getPokemon(pokemon) {
 // REDUCER - takes in the redux state and actions as arguments
 // each case will return a new state and must not change the original state.
 // state must not be mutated. Make a copy of state and change the copy.
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
 
         case SET_STATIC_POKEMON:
+            //do more logic here
             return Object.assign({}, state, { pokemon: action.payload });
 
         case GET_POKEMON + '_REJECTED':

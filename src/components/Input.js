@@ -1,38 +1,32 @@
-import React from 'react';
-import Description from './Description'
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { getPokemon, setStaticPokemon } from '../reducer/reducer'
-import {staticPokemon} from '../staticPokemon'
+import { staticPokemon } from '../staticPokemon'
 
-class Input extends React.Component {
+class Input extends Component {
   state = {
     input: ''
   }
 
+  // using this.props.dispatch sends the action to the reducer
+  submitStatic = () => this.props.dispatch(setStaticPokemon(staticPokemon))
 
-  //using this.props.dispatch sends the action to the reducer
-  setStaticPokemon = () => this.props.dispatch(setStaticPokemon(staticPokemon))
-
-  getPokemon = () => {
-    const { input } = this.state;
-    input ? this.props.dispatch(getPokemon(input)) : alert('please enter a pokemon')
+  submit = () => {
+    this.state.input ? this.props.dispatch(getPokemon(this.state.input)) : alert('please enter a pokemon')
   }
 
-
-
   render() {
+    console.log('input =>', this.state.input)
     return (
       <div >
         <h1 className='header'>Pokemon Finder</h1>
         <input type='text' placeholder='Enter a pokemon' value={this.state.input} onChange={e => this.setState({ input: e.target.value })} />
-        <button onClick={this.getPokemon}>Submit</button>
-        <button onClick={this.setStaticPokemon}>Submit Static</button>
-        <Description />
+        <button onClick={this.submit}>Submit</button>
+        <button onClick={this.submitStatic}>Submit Static</button>
       </div>
     )
   }
 }
 
-
-// connects the react component to the redux state - this also gives access to this.props.dispatch automatically
+// connects the react component to redux - this also gives access to this.props.dispatch automatically if second argument is not defined
 export default connect()(Input);
